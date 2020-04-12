@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MestoRidom</string>
+
+    <!--Навигационное окно боковое-->
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+    <!--Навигационное окно снизу-->
+
+
+    <!--Остальное-->
+    <string name="todo">TODO</string>
+    <string name="loading_error_msg"> Ошибка при загрузке информации </string>
+    <string name="hint_search">A324, Кафе, Точка кипения...</string>
+    <string name="body_build">Корпус А</string>
+    <string name="place_build">Кампус ДВФУ</string>
+</resources>
