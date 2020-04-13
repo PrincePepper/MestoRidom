@@ -115,7 +115,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/view_search_nested"
         app:layout_constraintEnd_toEndOf="@+id/view_search_nested"
         app:layout_constraintStart_toStartOf="@+id/view_search_nested"
-        app:layout_constraintTop_toTopOf="@+id/view_search_nested" />
+        app:layout_constraintTop_toTopOf="@+id/view_search_nested"
+        android:textCursorDrawable="@null"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
