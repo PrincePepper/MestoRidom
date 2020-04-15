@@ -3,13 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#F8F7F7</item>
+        <item name="colorPrimaryDark">#F8F7F7</item>
+        <item name="colorAccent">@color/color6</item>
+        <item name="android:navigationBarColor">@color/color1</item>
 
-<!--        <item name="android:textSelectHandle">@drawable/text_select_handle_middle</item>-->
-<!--        <item name="android:textSelectHandleLeft">@drawable/text_select_handle_left</item>-->
-<!--        <item name="android:textSelectHandleRight">@drawable/text_select_handle_right</item>-->
+        <item name="android:textSelectHandle">@drawable/ic_fselecthandlecenter</item>
+        <item name="android:textSelectHandleLeft">@drawable/ic_fselecthandleleft</item>
+        <item name="android:textSelectHandleRight">@drawable/ic_fselecthandleright</item>
 
     </style>
 
@@ -24,6 +25,20 @@
 
     <style name="Text.Primary.Header">
         <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Intro">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Intro.Primary">
+        <item name="android:textColor">@color/Black</item>
+    </style>
+
+    <style name="Intro.Primary.Header">
+        <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

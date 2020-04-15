@@ -21,6 +21,7 @@
 
     <ImageView
         android:id="@+id/progressbar_screen"
+        android:rotation="55"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/todo"

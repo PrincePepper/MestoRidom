@@ -7,37 +7,5 @@
     tools:context=".MainActivity"
     style="@style/Widget.MaterialComponents.BottomAppBar">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:background="@color/color1"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView.Housing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Корпус А"
-        style="@style/Text.Primary.Header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
-    <TextView
-        android:id="@+id/textView.Campus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Кампус ДВФУ"
-        style="@style/Text.Primary"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView.Housing"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

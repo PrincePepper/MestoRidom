@@ -25,4 +25,44 @@
     <string name="hint_search">A324, Кафе, Точка кипения...</string>
     <string name="body_build">Корпус А</string>
     <string name="place_build">Кампус ДВФУ</string>
+
+
+    <string name="intro_text_1">
+    Потерялись на кампусе?\n
+     Нажмите кнопку\n
+    определение\n
+    </string>
+    <string name="intro_text_2">
+        Используйте нашу строку\n
+        поиска, чтобы найти нужную\n
+        аудиторию, конференц-зал,\n
+        кафе и другие случайные\n
+        объекты.\n\n
+        Только тс-с, туалет там же\n
+        можно найти)
+    </string>
+    <string name="intro_text_3">
+        Самые нужные вам\n
+        категории мест находятся в\n
+        быстрой доступности в\n
+        режиме поиска.\n\n
+        Вам даже не надо вводить\n
+        поисковой запрос
+    </string>
+    <string name="intro_text_4">
+        Мы точно говорим.\n
+        А еще мы знаем китайский. А вы?
+    </string>
+    <string name="intro_text_5">
+        На этом все. Фичи пока\n
+        закончились. Мы вас\n пригласим сюда когда,\n
+        что-то новое появится.\n\n
+        Пойдем искать место?\n
+        Оно рядом.
+    </string>
+    <string name="intro_htext_1">Мы знаем где вы</string>
+    <string name="intro_htext_2">Найдите место</string>
+    <string name="intro_htext_3">Все нужное рядом</string>
+    <string name="intro_htext_4">Ду ю спик Инглиш?</string>
+    <string name="intro_htext_5">Ну что начнем?</string>
 </resources>

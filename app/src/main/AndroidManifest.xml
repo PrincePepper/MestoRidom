@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".IntroActivity"></activity>
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="nosensor">
@@ -27,7 +28,7 @@
             android:focusableInTouchMode="true"
             android:label="@string/title_activity_navigation"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
