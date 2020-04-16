@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MestoRidom</string>
+    <string name="app_name">МЕСТО РЯДОМ</string>
 
     <!--Навигационное окно боковое-->
     <string name="title_activity_navigation">NavigationActivity</string>
@@ -65,4 +65,5 @@
     <string name="intro_htext_3">Все нужное рядом</string>
     <string name="intro_htext_4">Ду ю спик Инглиш?</string>
     <string name="intro_htext_5">Ну что начнем?</string>
+    <string name="text_position">Сервис позицинирования внутри помещений</string>
 </resources>

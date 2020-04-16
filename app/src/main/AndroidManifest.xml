@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".IntroActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="nosensor"></activity>
+        <activity android:name=".IntroActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="nosensor">
@@ -22,13 +25,6 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="nosensor" />
-        <activity
-            android:name=".NavigationActivity"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
-            android:label="@string/title_activity_navigation"
-            android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
