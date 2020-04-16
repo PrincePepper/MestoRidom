@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/progressbar_image"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,10 +21,10 @@
 
     <ImageView
         android:id="@+id/progressbar_screen"
-        android:rotation="55"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:contentDescription="@string/todo"
+        android:rotation="55"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

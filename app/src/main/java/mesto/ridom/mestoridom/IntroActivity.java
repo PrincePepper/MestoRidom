@@ -48,11 +48,11 @@ public class IntroActivity extends AppCompatActivity {
                     case 3:
                         textView.setText(R.string.intro_text_5);
                         textViewH.setText(R.string.intro_htext_5);
-                        imageView.setImageResource(R.drawable.mesto_ridom);
+                        imageView.setImageResource(R.drawable.ic_mesto_ridom);
                         a++;
                         break;
                     case 4:
-                        Intent SplashIntent = new Intent(IntroActivity.this, NavigationActivity.class);
+                        Intent SplashIntent = new Intent(IntroActivity.this, MainActivity.class);
                         IntroActivity.this.startActivity(SplashIntent);
                         IntroActivity.this.finish();
                 }
@@ -61,7 +61,7 @@ public class IntroActivity extends AppCompatActivity {
         textViewGip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent SplashIntent = new Intent(IntroActivity.this, NavigationActivity.class);
+                Intent SplashIntent = new Intent(IntroActivity.this, MainActivity.class);
                 IntroActivity.this.startActivity(SplashIntent);
 
                 IntroActivity.this.finish();
