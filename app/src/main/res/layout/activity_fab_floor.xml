@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".FabFloorActivity">
+
+    <Button
+        android:id="@+id/fabThird"
+        style="@style/Text.Floor"
+        android:layout_width="63.75dp"
+        android:layout_height="63.75dp"
+        android:layout_marginStart="16dp"
+        android:text="3"
+        app:backgroundTint="@color/other"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fabSecond"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/fabSecond"
+        style="@style/Text.Floor"
+        android:layout_width="63.75dp"
+        android:layout_height="63.75dp"
+        android:layout_marginStart="16dp"
+        android:text="2"
+        app:backgroundTint="@color/other"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fabFirst"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/fabFirst"
+        style="@style/Text.Floor"
+        android:layout_width="63.75dp"
+        android:layout_height="63.75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/first"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="1"
+        app:cornerRadius="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

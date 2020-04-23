@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -20,20 +22,26 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splach_screen);
         SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                 Context.MODE_PRIVATE);
+
+        //убираем вернее меню
+        Window window = getWindow();
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         // проверяем, первый ли раз открывается программа
         boolean hasVisited = sp.getBoolean("hasVisited", false);
+
         if (!hasVisited) {
             // выводим нужную активность
-
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
             e.apply(); // не забудьте подтвердить изменения
             startSplashAmimation();
-        }else{
+        } else {
             startSplashAmimation2();
         }
 
     }
+
     private void startSplashAmimation2() {
         startAnimation();
         new Handler().postDelayed(new Runnable() {
@@ -42,12 +50,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 Intent SplashIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 SplashScreenActivity.this.startActivity(SplashIntent);
-
                 SplashScreenActivity.this.finish();
 
             }
         }, 3000);
     }
+
     private void startSplashAmimation() {
         startAnimation();
         new Handler().postDelayed(new Runnable() {

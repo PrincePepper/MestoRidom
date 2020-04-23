@@ -7,15 +7,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class FabFloorActivity extends AppCompatActivity {
 
     boolean isRotate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_fab_floor);
         Button fabfirst = findViewById(R.id.fabFirst);
         final Button fabsecond = findViewById(R.id.fabSecond);
         final Button fabthird = findViewById(R.id.fabThird);
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fabsecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Calling", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FabFloorActivity.this, "Calling", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -47,21 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, "mic", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FabFloorActivity.this, "mic", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-
-    private static long back_pressed;
-
-    @Override//выход по времени
-    public void onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis())
-            super.onBackPressed();
-        else
-            Toast.makeText(getBaseContext(), "Нажми еще раз чтобы выйти!",
-                    Toast.LENGTH_SHORT).show();
-        back_pressed = System.currentTimeMillis();
     }
 }

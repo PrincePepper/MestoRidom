@@ -3,6 +3,8 @@ package mesto.ridom.mestoridom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +18,10 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+
+        //убираем вернее меню
+        Window window = getWindow();
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         final TextView textViewGip = findViewById(R.id.intro_giptext);
         final TextView textView = findViewById(R.id.intro_text);
@@ -52,7 +58,7 @@ public class IntroActivity extends AppCompatActivity {
                         a++;
                         break;
                     case 4:
-                        Intent SplashIntent = new Intent(IntroActivity.this, MainActivity.class);
+                        Intent SplashIntent = new Intent(IntroActivity.this, LoginActivity.class);
                         IntroActivity.this.startActivity(SplashIntent);
                         IntroActivity.this.finish();
                 }
@@ -61,7 +67,7 @@ public class IntroActivity extends AppCompatActivity {
         textViewGip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent SplashIntent = new Intent(IntroActivity.this, MainActivity.class);
+                Intent SplashIntent = new Intent(IntroActivity.this, LoginActivity.class);
                 IntroActivity.this.startActivity(SplashIntent);
 
                 IntroActivity.this.finish();
