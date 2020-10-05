@@ -1,32 +1,24 @@
 package mesto.ridom.mestoridom;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends BaseActivity {
     private static final String MY_SETTINGS = "my_settings";
+
+    public static final String APP_PREFERENCES_NAME = "Name_Person";
+    private static SharedPreferences sp;
+    public static String Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splach_screen);
-        SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
-                Context.MODE_PRIVATE);
-
-        //убираем вернее меню
-        Window window = getWindow();
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        sp = getSharedPreferences(MY_SETTINGS, MODE_PRIVATE);
         // проверяем, первый ли раз открывается программа
         boolean hasVisited = sp.getBoolean("hasVisited", false);
 
@@ -43,12 +35,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void startSplashAmimation2() {
-        startAnimation();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                Intent SplashIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                Intent SplashIntent = new Intent(SplashScreenActivity.this, AuthorizationActivity.class);
                 SplashScreenActivity.this.startActivity(SplashIntent);
                 SplashScreenActivity.this.finish();
 
@@ -57,23 +47,14 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void startSplashAmimation() {
-        startAnimation();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 Intent SplashIntent = new Intent(SplashScreenActivity.this, IntroActivity.class);
                 SplashScreenActivity.this.startActivity(SplashIntent);
-
                 SplashScreenActivity.this.finish();
 
             }
         }, 3000);
-    }
-
-    private void startAnimation() {
-        ImageView imageView = findViewById(R.id.progressbar_screen);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.comboanim);
-        imageView.startAnimation(animation);
     }
 }

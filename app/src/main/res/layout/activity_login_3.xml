@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authorization.RegistrationActivity">
+
+    <ImageView
+        android:id="@+id/login_wave_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="23dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/reg_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_wave_3" />
+
+    <EditText
+        android:id="@+id/reg_name"
+        style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/textedit_login_email"
+        android:ems="10"
+        android:hint="Имя"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:paddingLeft="14dp"
+        android:textColor="#899499"
+        app:layout_constraintBottom_toTopOf="@+id/reg_email_shield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/reg_password_shield"
+        style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/textedit_login_email"
+        android:ems="10"
+        android:hint="Введите пароль"
+        android:imeOptions="actionNext"
+        android:inputType="textVisiblePassword"
+        android:paddingLeft="14dp"
+        android:textColor="#899499"
+        app:layout_constraintBottom_toTopOf="@+id/reg_password_shield_repeat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/reg_email_shield"
+        style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/textedit_login_email"
+        android:ems="10"
+        android:hint="username@email.com"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="14dp"
+        android:textColor="#899499"
+        app:layout_constraintBottom_toTopOf="@+id/reg_password_shield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/reg_password_shield_repeat"
+        style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="31dp"
+        android:background="@drawable/textedit_login_email"
+        android:ems="10"
+        android:hint="Введите повтороно пароль"
+        android:imeOptions="actionNext"
+        android:inputType="textVisiblePassword"
+        android:paddingLeft="14dp"
+        android:textColor="#899499"
+        app:layout_constraintBottom_toTopOf="@+id/reg_checkBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/registration_btn"
+        style="@style/Text.Primary"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="31dp"
+        android:background="@drawable/btn_login_continue"
+        android:letterSpacing=".10"
+        android:text="Зарегистрироваться"
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="363dp" />
+
+    <CheckBox
+        android:id="@+id/reg_checkBox"
+        style="@style/Text.Сonsent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="34dp"
+        android:layout_weight="1"
+        android:button="@drawable/checkbox_selector"
+        android:checked="true"
+        android:paddingStart="8dp"
+        android:text="@string/consent"
+        app:layout_constraintBottom_toTopOf="@+id/registration_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добро пожаловать"
+        app:layout_constraintBottom_toBottomOf="@+id/login_wave_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextBold.Registration" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Зарегистрируйтесь, чтобы продолжить"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        style="@style/Text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

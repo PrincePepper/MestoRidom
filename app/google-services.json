@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "268790007626",
+    "firebase_url": "https://mesto-r-2101.firebaseio.com",
+    "project_id": "mesto-r-2101",
+    "storage_bucket": "mesto-r-2101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268790007626:android:29cfdba7d98c337f9363b3",
+        "android_client_info": {
+          "package_name": "mesto.ridom.mestoridom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268790007626-55i58clu35tvlh0o5la4v6ga2lkvqi58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfw4QJwJpUdWDMDqVANx_-2GyAYwT-2Sw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268790007626-55i58clu35tvlh0o5la4v6ga2lkvqi58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

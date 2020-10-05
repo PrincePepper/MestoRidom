@@ -60,10 +60,22 @@
         Пойдем искать место?\n
         Оно рядом.
     </string>
+
     <string name="intro_htext_1">Мы знаем где вы</string>
     <string name="intro_htext_2">Найдите место</string>
     <string name="intro_htext_3">Все нужное рядом</string>
     <string name="intro_htext_4">Ду ю спик Инглиш?</string>
     <string name="intro_htext_5">Ну что начнем?</string>
     <string name="text_position">Сервис позицинирования внутри помещений</string>
+
+    <string name="authentication_failed">Ошибка аутентификации</string>
+    <string name="verification_email">Письмо-подтверждение отправлено вам на почту</string>
+
+    <string name="login_with_vKontakte">Войти через вконтакте</string>
+    <string name="login_button">Войти</string>
+    <string name="registration_button">Регистрация</string>
+    <string name="forgot_password"><u>Забыли пароль?</u></string>
+    <string name="consent">Я принимаю условия использования\n
+        и политику конфидеценциальности</string>
+
 </resources>

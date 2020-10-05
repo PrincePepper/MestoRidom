@@ -11,23 +11,41 @@
         <item name="android:textSelectHandle">@drawable/ic_fselecthandlecenter</item>
         <item name="android:textSelectHandleLeft">@drawable/ic_fselecthandleleft</item>
         <item name="android:textSelectHandleRight">@drawable/ic_fselecthandleright</item>
-
     </style>
 
     <style name="Text">
-        <item name="android:textSize">18sp</item>
-        <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="TextBold">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/montserrat_bold</item>
     </style>
 
     <style name="Text.Primary">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/Black</item>
     </style>
 
-    <style name="Text.Primary.Header">
-        <item name="android:textSize">28sp</item>
-        <item name="android:textStyle">bold</item>
+
+    <style name="TextBold.Primary">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/Black</item>
     </style>
+
+    <style name="Text.Сonsent">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#122932</item>
+    </style>
+
+    <style name="TextBold.Registration">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#122932</item>
+    </style>
+
 
     <style name="Intro">
         <item name="android:textSize">20sp</item>
@@ -46,16 +64,14 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Text.Login">
-        <item name="android:textColor">@color/Black</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">#B3FFFFFF</item>
     </style>
 
     <style name="Text.Floor">
-        <item name="android:textSize">32dp</item>
+        <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/Black</item>
     </style>
-    <!--    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 
 </resources>

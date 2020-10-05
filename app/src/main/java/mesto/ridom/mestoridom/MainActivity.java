@@ -1,13 +1,15 @@
 package mesto.ridom.mestoridom;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     boolean isRotate = false;
 
@@ -39,14 +41,19 @@ public class MainActivity extends AppCompatActivity {
         fabsecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Calling", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = AuthorizationActivity.sp2.edit();
+                editor.putBoolean(AuthorizationActivity.APP_PREFERENCES_PEOPLE, false);
+                editor.apply();
+
+                Intent SplashIntent = new Intent(MainActivity.this, AuthorizationActivity.class);
+                MainActivity.this.startActivity(SplashIntent);
+                MainActivity.this.finish();
             }
         });
 
         fabthird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(MainActivity.this, "mic", Toast.LENGTH_SHORT).show();
             }
         });
@@ -64,4 +71,5 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         back_pressed = System.currentTimeMillis();
     }
+
 }

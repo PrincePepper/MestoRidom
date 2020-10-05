@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
+
 public class IntroActivity extends AppCompatActivity {
     int a = 0;
 
@@ -58,7 +60,7 @@ public class IntroActivity extends AppCompatActivity {
                         a++;
                         break;
                     case 4:
-                        Intent SplashIntent = new Intent(IntroActivity.this, LoginActivity.class);
+                        Intent SplashIntent = new Intent(IntroActivity.this, AuthorizationActivity.class);
                         IntroActivity.this.startActivity(SplashIntent);
                         IntroActivity.this.finish();
                 }
@@ -67,7 +69,7 @@ public class IntroActivity extends AppCompatActivity {
         textViewGip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent SplashIntent = new Intent(IntroActivity.this, LoginActivity.class);
+                Intent SplashIntent = new Intent(IntroActivity.this, AuthorizationActivity.class);
                 IntroActivity.this.startActivity(SplashIntent);
 
                 IntroActivity.this.finish();
