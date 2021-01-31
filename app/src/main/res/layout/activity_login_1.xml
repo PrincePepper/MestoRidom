@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authorization.AuthorizationActivity">
+
+    <TextView
+        android:id="@+id/skip_login_step"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Пропустить этот шаг"
+        android:textColor="#899499"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_login_google"
+        style="@style/TextBold.Primary"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_gravity="end"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/btn_login_google"
+        android:drawableLeft="@drawable/ic_google_icon"
+        android:drawablePadding="8dp"
+        android:elevation="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="Войдите через Google"
+        android:textColor="#4A6670"
+        app:layout_constraintBottom_toTopOf="@+id/skip_login_step"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider_login_1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/login_divider_long"
+        android:layout_marginEnd="@dimen/login_divider_short"
+        android:layout_marginBottom="34dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/button_login_google"
+        app:layout_constraintEnd_toStartOf="@+id/text_or_view"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_or_view"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="или"
+        android:textColor="#122932"
+        app:layout_constraintBottom_toTopOf="@+id/button_login_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider_login_2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/login_divider_short"
+        android:layout_marginEnd="@dimen/login_divider_long"
+        android:layout_marginBottom="34dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/button_login_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/text_or_view" />
+
+    <Button
+        android:id="@+id/check_login_reg"
+        style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/btn_login_continue"
+        android:letterSpacing=".10"
+        android:text="Продолжить"
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toTopOf="@+id/text_or_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/email_shield"
+        style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/login_button_heignt"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/textedit_login_email"
+        android:ems="10"
+        android:hint="Введите адрес почты"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="14dp"
+        android:textColor="#899499"
+        app:layout_constraintBottom_toTopOf="@+id/check_login_reg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/login_or_registration"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="22dp"
+        android:text="Войдите или зарегистрируйтесь"
+        app:layout_constraintBottom_toTopOf="@+id/email_shield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/indoor_navigation_service"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="41dp"
+        android:text="Сервис навигации внутри помещений"
+        app:layout_constraintBottom_toTopOf="@+id/login_or_registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/login_main_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_margin_l_r"
+        android:layout_marginEnd="@dimen/login_margin_l_r"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/indoor_navigation_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_logo_main" />
+
+    <ImageView
+        android:id="@+id/login_wave_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="26dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/login_main_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_wave_1" />
+
+    <ImageView
+        android:id="@+id/login_mini_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/login_wave_3"
+        app:layout_constraintEnd_toEndOf="@+id/login_wave_3"
+        app:layout_constraintStart_toStartOf="@+id/login_wave_3"
+        app:layout_constraintTop_toTopOf="@+id/login_wave_3"
+        app:srcCompat="@drawable/ic_logo_mini" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
