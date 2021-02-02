@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/dummy_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_dummy_map" />
+
+    <LinearLayout
+        android:id="@+id/main_screen_help_snippet"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:alpha="0.85"
+        android:background="@color/White"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/dummy_map"
+        app:layout_anchorGravity="top">
+
+        <TextView
+            android:id="@+id/help_where_are_you_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_vertical"
+            android:text="@string/help_suggestion_where_are_you"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/define_your_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_vertical"
+            android:text="@string/help_suggestion_define_your_location" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_screen_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_fitToContents="true"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@drawable/bottom_round_corner"
+        android:orientation="vertical"
+        android:elevation="50dp">
+        <View
+            android:layout_width="140dp"
+            android:layout_height="3dp"
+            android:background="@drawable/bottom_round_corner_search"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:text="@string/what_are_you_seeking_for"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="27dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@string/bottom_sheet_seek_comply"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/place_categories_recycler"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"/>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -18,6 +18,8 @@
 
     <!--Навигационное окно снизу-->
 
+    <string name="map_screen">НАВИГАЦИЯ</string>
+    <string name="settings_screen">НАСТРОЙКИ</string>
 
     <!--Остальное-->
     <string name="todo">TODO</string>
@@ -77,5 +79,10 @@
     <string name="forgot_password"><u>Забыли пароль?</u></string>
     <string name="consent">Я принимаю условия использования\n
         и политику конфидеценциальности</string>
+
+    <string name="help_suggestion_where_are_you">Где вы?</string>
+    <string name="help_suggestion_define_your_location">Выберите на карте место, где вы находитесь</string>
+    <string name="what_are_you_seeking_for">Что вы ищете?</string>
+    <string name="bottom_sheet_seek_comply">Выберите категорию или введите запрос</string>
 
 </resources>
