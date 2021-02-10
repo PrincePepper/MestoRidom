@@ -1,6 +1,7 @@
 package mesto.ridom.mestoridom;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -13,16 +14,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
@@ -109,6 +116,9 @@ public class MainActivity extends BaseActivity {
         private View rootView;
         private LinearLayout bottomSheet;
         private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
+        private RecyclerView recyclerView;
+        private PlaceCategoryAdapter placeCategoryAdapter;
+        private List<PlaceCategory> tmpData;
 
         public MapScreenFragment(Bundle args) {
             this.args = args;
@@ -116,6 +126,10 @@ public class MainActivity extends BaseActivity {
 
         private float dpToPixels(int dp, Context context) {
             return dp * (float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
+        }
+
+        private float dpToPixels(int dp) {
+            return dp * (float) this.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         }
 
         @Override
@@ -132,7 +146,35 @@ public class MainActivity extends BaseActivity {
             bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
             bottomSheetBehavior.setDraggable(true);
             bottomSheetBehavior.setHideable(false);
-            bottomSheetBehavior.setPeekHeight((int)dpToPixels(260, getActivity()));
+            bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
+            initRecycler();
+        }
+
+        private void initRecycler() {
+            recyclerView = rootView.findViewById(R.id.place_categories_recycler);
+            tmpData = new LinkedList<PlaceCategory>();
+            RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
+                @Override
+                public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                    int parentWidth = parent.getWidth();
+                    int spaceBetween = (parentWidth - ((int)dpToPixels(57)) * 4 ) / 4;
+                    outRect.right = spaceBetween / 2;
+                    outRect.left = spaceBetween / 2;
+                }
+            };
+            //TODO handle exceptions with null
+            tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
+            tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
+            tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
+            tmpData.add(new PlaceCategory("Лифт", 0xFFD7FAFF, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_select_o, null)));
+            tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
+            tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
+            tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
+            tmpData.add(new PlaceCategory("Лифт", 0xFFD7FAFF, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_select_o, null)));
+            placeCategoryAdapter = new PlaceCategoryAdapter(tmpData);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+            recyclerView.setAdapter(placeCategoryAdapter);
+            recyclerView.addItemDecoration(itemDecoration);
         }
     }
 
