@@ -81,7 +81,28 @@
             android:id="@+id/place_categories_recycler"
             android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:layout_height="90dp"/>
+            android:layout_height="87dp"/>
+
+        <FrameLayout
+            android:id="@+id/main_screen_search_field_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+            <EditText
+                android:inputType="text"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:textSize="10sp"
+                android:id="@+id/main_screen_search_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/place_search_hint"
+                android:background="@null"
+                />
+        </FrameLayout>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -84,5 +84,6 @@
     <string name="help_suggestion_define_your_location">Выберите на карте место, где вы находитесь</string>
     <string name="what_are_you_seeking_for">Что вы ищете?</string>
     <string name="bottom_sheet_seek_comply">Выберите категорию или введите запрос</string>
+    <string name="place_search_hint">А324, Кафе, Точка кипения…</string>
 
 </resources>

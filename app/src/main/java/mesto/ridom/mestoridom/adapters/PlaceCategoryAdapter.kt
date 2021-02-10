@@ -1,6 +1,5 @@
-package mesto.ridom.mestoridom
+package mesto.ridom.mestoridom.adapters
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.place_category_view_holder_layout.view.*
+import mesto.ridom.mestoridom.R
 
 class PlaceCategoryAdapter(var data: MutableList<PlaceCategory>) : RecyclerView.Adapter<PlaceCategoryAdapter.PlaceCategoryViewHolder>() {
 

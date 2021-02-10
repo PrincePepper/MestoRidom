@@ -2,18 +2,19 @@ package mesto.ridom.mestoridom;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -30,6 +31,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import mesto.ridom.mestoridom.adapters.PlaceCategory;
+import mesto.ridom.mestoridom.adapters.PlaceCategoryAdapter;
 
 
 public class MainActivity extends BaseActivity {
@@ -119,6 +123,8 @@ public class MainActivity extends BaseActivity {
         private RecyclerView recyclerView;
         private PlaceCategoryAdapter placeCategoryAdapter;
         private List<PlaceCategory> tmpData;
+        private FrameLayout searchPlaceHolder;
+        private EditText searchPlace;
 
         public MapScreenFragment(Bundle args) {
             this.args = args;
@@ -142,12 +148,24 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             // unpack args
+
             bottomSheet = rootView.findViewById(R.id.main_screen_bottom_sheet);
+            searchPlaceHolder = rootView.findViewById(R.id.main_screen_search_field_holder);
+            searchPlace = searchPlaceHolder.findViewById(R.id.main_screen_search_edit_text);
+
+            Drawable searchPlaceHolderBackground = ResourcesCompat.getDrawable(getResources(), R.drawable.bottom_round_corner_search, null);
+            assert searchPlaceHolderBackground != null;
+            searchPlaceHolderBackground.setTint(ResourcesCompat.getColor(getResources(), R.color.searchPlaceHolder, null));
+            searchPlaceHolderBackground.setAlpha((int) (0.12f * 255));
+            searchPlaceHolder.setBackground(searchPlaceHolderBackground);
+
             bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
             bottomSheetBehavior.setDraggable(true);
             bottomSheetBehavior.setHideable(false);
             bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
+
             initRecycler();
+
         }
 
         private void initRecycler() {
@@ -162,7 +180,13 @@ public class MainActivity extends BaseActivity {
                     outRect.left = spaceBetween / 2;
                 }
             };
-            //TODO handle exceptions with null
+            /*
+            TODO handle exceptions with null
+             */
+            tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
+            tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
+            tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
+            tmpData.add(new PlaceCategory("Лифт", 0xFFD7FAFF, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_select_o, null)));
             tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
             tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
             tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
