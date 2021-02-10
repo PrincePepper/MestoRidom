@@ -1,4 +1,4 @@
-package mesto.ridom.mestoridom;
+package mesto.ridom.mestoridom.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import mesto.ridom.mestoridom.FabAnimation;
+import mesto.ridom.mestoridom.R;
 
 
 public class FabFloorActivity extends AppCompatActivity {

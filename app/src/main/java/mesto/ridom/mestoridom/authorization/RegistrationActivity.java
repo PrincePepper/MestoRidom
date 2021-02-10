@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import mesto.ridom.mestoridom.MainActivity;
+import mesto.ridom.mestoridom.activities.MainActivity;
 import mesto.ridom.mestoridom.R;
 
 public class RegistrationActivity extends AuthorizationActivity implements View.OnClickListener {

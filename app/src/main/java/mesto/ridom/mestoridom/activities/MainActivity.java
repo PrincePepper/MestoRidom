@@ -1,13 +1,16 @@
-package mesto.ridom.mestoridom;
+package mesto.ridom.mestoridom.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -20,6 +23,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -32,8 +37,11 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.LinkedList;
 import java.util.List;
 
+import mesto.ridom.mestoridom.R;
+import mesto.ridom.mestoridom.activities.BaseActivity;
 import mesto.ridom.mestoridom.adapters.PlaceCategory;
 import mesto.ridom.mestoridom.adapters.PlaceCategoryAdapter;
+import mesto.ridom.mestoridom.viewmodel.PlaceCategoryViewModel;
 
 
 public class MainActivity extends BaseActivity {
@@ -41,12 +49,13 @@ public class MainActivity extends BaseActivity {
     private ViewPager2 viewPager;
     private FragmentStateAdapter fragmentStateAdapter;
     private TabLayout tabLayout;
+    private InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         viewPager = findViewById(R.id.main_screen_pager);
         tabLayout = findViewById(R.id.main_screen_tab_layout);
         fragmentStateAdapter = new FragmentAdapter(this);
@@ -100,7 +109,7 @@ public class MainActivity extends BaseActivity {
         public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
-                    return new MapScreenFragment(mapScreenFragmentState);
+                    return new MapScreenFragment(mapScreenFragmentState, imm);
                 default:
                     return new SettingsScreenFragment();
             }
@@ -122,11 +131,15 @@ public class MainActivity extends BaseActivity {
         private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
         private RecyclerView recyclerView;
         private PlaceCategoryAdapter placeCategoryAdapter;
-        private List<PlaceCategory> tmpData;
         private FrameLayout searchPlaceHolder;
         private EditText searchPlace;
+        private InputMethodManager imm;
+        private RecyclerView placeSearchRecycler;
 
-        public MapScreenFragment(Bundle args) {
+        private PlaceCategoryViewModel placeCategoryViewModel;
+
+        public MapScreenFragment(Bundle args, InputMethodManager imm) {
+            this.imm = imm;
             this.args = args;
         }
 
@@ -135,7 +148,7 @@ public class MainActivity extends BaseActivity {
         }
 
         private float dpToPixels(int dp) {
-            return dp * (float) this.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
+            return dpToPixels(dp, getContext());
         }
 
         @Override
@@ -149,6 +162,8 @@ public class MainActivity extends BaseActivity {
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             // unpack args
 
+            placeCategoryViewModel = new ViewModelProvider(this).get(PlaceCategoryViewModel.class);
+
             bottomSheet = rootView.findViewById(R.id.main_screen_bottom_sheet);
             searchPlaceHolder = rootView.findViewById(R.id.main_screen_search_field_holder);
             searchPlace = searchPlaceHolder.findViewById(R.id.main_screen_search_edit_text);
@@ -159,10 +174,20 @@ public class MainActivity extends BaseActivity {
             searchPlaceHolderBackground.setAlpha((int) (0.12f * 255));
             searchPlaceHolder.setBackground(searchPlaceHolderBackground);
 
+            searchPlace.setOnTouchListener(new View.OnTouchListener() {
+                @SuppressLint("ClickableViewAccessibility")
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    return false;
+                }
+            });
+
             bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
             bottomSheetBehavior.setDraggable(true);
             bottomSheetBehavior.setHideable(false);
             bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
+
 
             initRecycler();
 
@@ -170,36 +195,37 @@ public class MainActivity extends BaseActivity {
 
         private void initRecycler() {
             recyclerView = rootView.findViewById(R.id.place_categories_recycler);
-            tmpData = new LinkedList<PlaceCategory>();
             RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
                 @Override
                 public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                     int parentWidth = parent.getWidth();
-                    int spaceBetween = (parentWidth - ((int)dpToPixels(57)) * 4 ) / 4;
+                    int spaceBetween = (parentWidth - ((int) dpToPixels(57)) * 4) / 4;
                     outRect.right = spaceBetween / 2;
                     outRect.left = spaceBetween / 2;
                 }
             };
-            /*
-            TODO handle exceptions with null
-             */
-            tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
-            tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
-            tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
-            tmpData.add(new PlaceCategory("Лифт", 0xFFD7FAFF, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_select_o, null)));
-            tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
-            tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
-            tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
-            tmpData.add(new PlaceCategory("Лифт", 0xFFD7FAFF, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_select_o, null)));
-            tmpData.add(new PlaceCategory("Выход", 0xFF85C2CC, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_log_out, null)));
-            tmpData.add(new PlaceCategory("Еда", 0xFFFFF6E8, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_coffee, null)));
-            tmpData.add(new PlaceCategory("Туалет", 0xFFF1FFF0, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_15, null)));
-            tmpData.add(new PlaceCategory("Лифт", 0xFFD7FAFF, ResourcesCompat.getDrawable(getResources() ,R.drawable.ic_select_o, null)));
-            placeCategoryAdapter = new PlaceCategoryAdapter(tmpData);
+
+            placeCategoryAdapter = new PlaceCategoryAdapter();
+
+            placeCategoryViewModel.setResources(getResources());
+            placeCategoryViewModel.getPaceCategories().observe(getViewLifecycleOwner(), new Observer<List<PlaceCategory>>() {
+                @Override
+                public void onChanged(List<PlaceCategory> placeCategories) {
+                    placeCategoryAdapter.data = placeCategories;
+                    placeCategoryAdapter.notifyDataSetChanged();
+                }
+            });
+
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
             recyclerView.setAdapter(placeCategoryAdapter);
             recyclerView.addItemDecoration(itemDecoration);
         }
+
+        private void initPlaceSearchRecycler() {
+            placeSearchRecycler = rootView.findViewById(R.id.place_search_recycler);
+
+        }
+
     }
 
     public static class SettingsScreenFragment extends Fragment {

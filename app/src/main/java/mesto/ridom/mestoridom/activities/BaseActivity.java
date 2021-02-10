@@ -1,4 +1,4 @@
-package mesto.ridom.mestoridom;
+package mesto.ridom.mestoridom.activities;
 
 import android.app.Activity;
 import android.view.View;

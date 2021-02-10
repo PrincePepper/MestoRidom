@@ -1,4 +1,4 @@
-package mesto.ridom.mestoridom;
+package mesto.ridom.mestoridom.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import mesto.ridom.mestoridom.R;
 import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
 
 public class IntroActivity extends AppCompatActivity {

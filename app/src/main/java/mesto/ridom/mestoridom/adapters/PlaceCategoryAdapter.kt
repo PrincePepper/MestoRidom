@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.place_category_view_holder_layout.view.*
 import mesto.ridom.mestoridom.R
 
-class PlaceCategoryAdapter(var data: MutableList<PlaceCategory>) : RecyclerView.Adapter<PlaceCategoryAdapter.PlaceCategoryViewHolder>() {
+class PlaceCategoryAdapter() : RecyclerView.Adapter<PlaceCategoryAdapter.PlaceCategoryViewHolder>() {
+
+    lateinit var data: MutableList<PlaceCategory>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceCategoryViewHolder =
             PlaceCategoryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.place_category_view_holder_layout, parent, false))

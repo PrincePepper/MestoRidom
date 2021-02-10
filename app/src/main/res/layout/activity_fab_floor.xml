@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".FabFloorActivity">
+    tools:context=".activities.FabFloorActivity">
 
     <Button
         android:id="@+id/fabThird"
