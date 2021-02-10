@@ -39,9 +39,11 @@ import java.util.List;
 
 import mesto.ridom.mestoridom.R;
 import mesto.ridom.mestoridom.activities.BaseActivity;
+import mesto.ridom.mestoridom.adapters.DisplayPlaceAdapter;
 import mesto.ridom.mestoridom.adapters.PlaceCategory;
 import mesto.ridom.mestoridom.adapters.PlaceCategoryAdapter;
 import mesto.ridom.mestoridom.viewmodel.PlaceCategoryViewModel;
+import mesto.ridom.mestoridom.viewmodel.PlacesViewModel;
 
 
 public class MainActivity extends BaseActivity {
@@ -135,8 +137,10 @@ public class MainActivity extends BaseActivity {
         private EditText searchPlace;
         private InputMethodManager imm;
         private RecyclerView placeSearchRecycler;
+        private DisplayPlaceAdapter displayPlaceAdapter;
 
         private PlaceCategoryViewModel placeCategoryViewModel;
+        private PlacesViewModel placesViewModel;
 
         public MapScreenFragment(Bundle args, InputMethodManager imm) {
             this.imm = imm;
@@ -162,7 +166,9 @@ public class MainActivity extends BaseActivity {
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             // unpack args
 
-            placeCategoryViewModel = new ViewModelProvider(this).get(PlaceCategoryViewModel.class);
+            ViewModelProvider viewModelProvider = new ViewModelProvider(this);
+            placeCategoryViewModel = viewModelProvider.get(PlaceCategoryViewModel.class);
+            placesViewModel = viewModelProvider.get(PlacesViewModel.class);
 
             bottomSheet = rootView.findViewById(R.id.main_screen_bottom_sheet);
             searchPlaceHolder = rootView.findViewById(R.id.main_screen_search_field_holder);
@@ -179,6 +185,10 @@ public class MainActivity extends BaseActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    if (placeSearchRecycler == null) {
+                        initPlaceSearchRecycler();
+                    }
+                    placeSearchRecycler.setVisibility(View.VISIBLE);
                     return false;
                 }
             });
@@ -188,9 +198,7 @@ public class MainActivity extends BaseActivity {
             bottomSheetBehavior.setHideable(false);
             bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
 
-
             initRecycler();
-
         }
 
         private void initRecycler() {
@@ -223,7 +231,17 @@ public class MainActivity extends BaseActivity {
 
         private void initPlaceSearchRecycler() {
             placeSearchRecycler = rootView.findViewById(R.id.place_search_recycler);
-
+            displayPlaceAdapter = new DisplayPlaceAdapter();
+            placesViewModel.getPlaces().observe(getViewLifecycleOwner(), new Observer<List<DisplayPlaceAdapter.Place>>() {
+                @Override
+                public void onChanged(List<DisplayPlaceAdapter.Place> places) {
+                    displayPlaceAdapter.data = places;
+                    displayPlaceAdapter.notifyDataSetChanged();
+                }
+            });
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            placeSearchRecycler.setAdapter(displayPlaceAdapter);
+            placeSearchRecycler.setLayoutManager(linearLayoutManager);
         }
 
     }
