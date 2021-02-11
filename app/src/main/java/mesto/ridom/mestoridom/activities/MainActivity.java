@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,12 +14,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -34,6 +37,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -223,7 +228,25 @@ public class MainActivity extends BaseActivity {
                 }
             };
 
-            placeCategoryAdapter = new PlaceCategoryAdapter();
+            PlaceCategoryAdapter.Callback callback = new PlaceCategoryAdapter.Callback() {
+                @Override
+                public void extFn(@NotNull View view) {
+                    Log.i(PlaceCategoryAdapter.VIEW_HOLDER_CLICKED, "viewholder clicked");
+                    if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+                        ImageButton backButton = new ImageButton(getContext());
+                        backButton.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_back_button, null));
+                        Drawable background = ResourcesCompat.getDrawable(getResources(), R.drawable.place_category_rounded_corners, null);
+                        background.setTint(0xFF000000);
+                        backButton.setBackground(background);
+                        ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams((int)dpToPixels(48), (int) dpToPixels(48));
+                        bottomSheet.addView(backButton, 0, layoutParams);
+                        backButton.setTranslationX(bottomSheet.getTranslationX() - dpToPixels(25));
+                        backButton.setTranslationY(bottomSheet.getTranslationY() + dpToPixels(70));
+                    }
+                }
+            };
+
+            placeCategoryAdapter = new PlaceCategoryAdapter(callback);
 
             placeCategoryViewModel.setResources(getResources());
             placeCategoryViewModel.getPaceCategories().observe(getViewLifecycleOwner(), new Observer<List<PlaceCategory>>() {
