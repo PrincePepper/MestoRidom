@@ -1,5 +1,7 @@
 package mesto.ridom.mestoridom.activities;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
@@ -26,6 +28,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -154,6 +157,7 @@ public class MainActivity extends BaseActivity {
         private TextView topHint1;
         private TextView topHint2;
         private ImageView dummyMap;
+        private ImageView backButton;
 
         private PlaceCategoryViewModel placeCategoryViewModel;
         private PlacesViewModel placesViewModel;
@@ -183,7 +187,7 @@ public class MainActivity extends BaseActivity {
 
                     dummyMap = new ImageView(getContext());
                     dummyMap.setId(View.generateViewId());
-                    dummyMap.setScaleType(ImageView.ScaleType.FIT_XY);
+                    //dummyMap.setScaleType(ImageView.ScaleType.FIT_XY);
                     dummyMap.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dummy_map, null));
                     rootView.addView(dummyMap, rootView.getWidth(), rootView.getHeight());
 
@@ -263,15 +267,7 @@ public class MainActivity extends BaseActivity {
                 public void extFn(@NotNull View view) {
                     Log.i(PlaceCategoryAdapter.VIEW_HOLDER_CLICKED, "viewholder clicked");
                     if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                        ImageButton backButton = new ImageButton(getContext());
-                        backButton.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_back_button, null));
-                        Drawable background = ResourcesCompat.getDrawable(getResources(), R.drawable.place_category_rounded_corners, null);
-                        background.setTint(0xFF000000);
-                        backButton.setBackground(background);
-                        ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) dpToPixels(48), (int) dpToPixels(48));
-                        bottomSheet.addView(backButton, 0, layoutParams);
-                        backButton.setTranslationX(bottomSheet.getTranslationX() - dpToPixels(25));
-                        backButton.setTranslationY(bottomSheet.getTranslationY() + dpToPixels(70));
+                        ObjectAnimator.ofFloat()
                     }
                 }
             };
