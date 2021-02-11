@@ -141,9 +141,9 @@ public class MainActivity extends BaseActivity {
 
         private Bundle args;
         private CoordinatorLayout rootView;
-        private LinearLayout bottomSheet;
+        private ConstraintLayout bottomSheet;
         private LinearLayout mainScreenHelpSnippet;
-        private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
+        private BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior;
         private RecyclerView recyclerView;
         private PlaceCategoryAdapter placeCategoryAdapter;
         private FrameLayout searchPlaceHolder;
@@ -229,7 +229,7 @@ public class MainActivity extends BaseActivity {
                             initPlaceSearchRecycler();
                         }
                         placeSearchRecycler.setVisibility(View.VISIBLE);
-                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 1000);
+                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 500);
                     }
                     return false;
                 }
