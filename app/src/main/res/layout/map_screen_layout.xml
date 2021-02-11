@@ -4,13 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/dummy_map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_dummy_map" />
-
     <LinearLayout
         android:id="@+id/main_screen_help_snippet"
         android:layout_width="match_parent"
@@ -18,9 +11,7 @@
         android:layout_gravity="bottom"
         android:alpha="0.85"
         android:background="@color/White"
-        android:orientation="vertical"
-        app:layout_anchor="@+id/dummy_map"
-        app:layout_anchorGravity="top">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/help_where_are_you_text"
@@ -44,13 +35,12 @@
             android:text="@string/help_suggestion_define_your_location" />
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_screen_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bottom_round_corner"
         android:elevation="50dp"
-        android:orientation="vertical"
         app:behavior_fitToContents="true"
         app:behavior_hideable="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -63,7 +53,13 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/what_are_you_seeking_for"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/top_text_hint2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/top_text_hint2"
@@ -72,13 +68,31 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/bottom_sheet_seek_comply" />
+            android:text="@string/bottom_sheet_seek_comply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_text_hint1"
+            app:layout_constraintBottom_toTopOf="@id/place_categories_recycler"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_categories_recycler"
             android:layout_width="match_parent"
             android:layout_height="87dp"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_text_hint2"
+            app:layout_constraintBottom_toTopOf="@id/main_screen_search_field_holder"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_back_button"
+            app:layout_constraintTop_toTopOf="@+id/main_screen_search_field_holder"
+            app:layout_constraintBottom_toBottomOf="@+id/main_screen_search_field_holder"
+            app:layout_constraintEnd_toStartOf="@id/main_screen_search_field_holder"/>
 
         <FrameLayout
             android:id="@+id/main_screen_search_field_holder"
@@ -86,7 +100,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/place_categories_recycler"
+            app:layout_constraintBottom_toTopOf="@id/place_search_recycler"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <EditText
                 android:id="@+id/main_screen_search_edit_text"
@@ -105,8 +123,12 @@
             android:id="@+id/place_search_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/main_screen_search_field_holder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

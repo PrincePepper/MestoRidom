@@ -1,24 +1,35 @@
 package mesto.ridom.mestoridom.activities;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -34,6 +45,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -130,9 +143,10 @@ public class MainActivity extends BaseActivity {
         public static final String ARGS_MAP_FRAGMENT = "ARGS_MAP_FRAGMENT";
 
         private Bundle args;
-        private View rootView;
-        private LinearLayout bottomSheet;
-        private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
+        private CoordinatorLayout rootView;
+        private ConstraintLayout bottomSheet;
+        private LinearLayout mainScreenHelpSnippet;
+        private BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior;
         private RecyclerView recyclerView;
         private PlaceCategoryAdapter placeCategoryAdapter;
         private FrameLayout searchPlaceHolder;
@@ -142,6 +156,8 @@ public class MainActivity extends BaseActivity {
         private DisplayPlaceAdapter displayPlaceAdapter;
         private TextView topHint1;
         private TextView topHint2;
+        private ImageView dummyMap;
+        private ImageView backButton;
 
         private PlaceCategoryViewModel placeCategoryViewModel;
         private PlacesViewModel placesViewModel;
@@ -162,12 +178,35 @@ public class MainActivity extends BaseActivity {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                                  @Nullable Bundle savedInstanceState) {
-            rootView = inflater.inflate(R.layout.map_screen_layout, container, false);
+            rootView = (CoordinatorLayout) inflater.inflate(R.layout.map_screen_layout, container, true);
+
+            rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                    dummyMap = new ImageView(getContext());
+                    dummyMap.setId(View.generateViewId());
+                    //dummyMap.setScaleType(ImageView.ScaleType.FIT_XY);
+                    dummyMap.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dummy_map, null));
+                    rootView.addView(dummyMap, rootView.getWidth(), rootView.getHeight());
+
+                    mainScreenHelpSnippet = rootView.findViewById(R.id.main_screen_help_snippet);
+                    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mainScreenHelpSnippet.getLayoutParams();
+                    layoutParams.setAnchorId(dummyMap.getId());
+                    layoutParams.width = rootView.getWidth();
+                    layoutParams.height = (int) dpToPixels(75);
+                    mainScreenHelpSnippet.setLayoutParams(layoutParams);
+
+                    rootView.bringChildToFront(mainScreenHelpSnippet);
+                }
+            });
             return rootView;
         }
 
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
             // unpack args
 
             ViewModelProvider viewModelProvider = new ViewModelProvider(this);
@@ -194,14 +233,14 @@ public class MainActivity extends BaseActivity {
                             initPlaceSearchRecycler();
                         }
                         placeSearchRecycler.setVisibility(View.VISIBLE);
-                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 1000);
+                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 500);
                     }
                     return false;
                 }
             });
 
             bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-            bottomSheetBehavior.setDraggable(true);
+            bottomSheetBehavior.setDraggable(false);
             bottomSheetBehavior.setHideable(false);
             bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
 
@@ -223,7 +262,17 @@ public class MainActivity extends BaseActivity {
                 }
             };
 
-            placeCategoryAdapter = new PlaceCategoryAdapter();
+            PlaceCategoryAdapter.Callback callback = new PlaceCategoryAdapter.Callback() {
+                @Override
+                public void extFn(@NotNull View view) {
+                    Log.i(PlaceCategoryAdapter.VIEW_HOLDER_CLICKED, "viewholder clicked");
+                    if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                        ObjectAnimator.ofFloat()
+                    }
+                }
+            };
+
+            placeCategoryAdapter = new PlaceCategoryAdapter(callback);
 
             placeCategoryViewModel.setResources(getResources());
             placeCategoryViewModel.getPaceCategories().observe(getViewLifecycleOwner(), new Observer<List<PlaceCategory>>() {
