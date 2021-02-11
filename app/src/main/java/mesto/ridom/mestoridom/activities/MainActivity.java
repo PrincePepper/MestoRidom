@@ -267,7 +267,6 @@ public class MainActivity extends BaseActivity {
                 public void extFn(@NotNull View view) {
                     Log.i(PlaceCategoryAdapter.VIEW_HOLDER_CLICKED, "viewholder clicked");
                     if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                        ObjectAnimator.ofFloat()
                     }
                 }
             };
