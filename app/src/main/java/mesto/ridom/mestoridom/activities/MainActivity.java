@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ import mesto.ridom.mestoridom.activities.BaseActivity;
 import mesto.ridom.mestoridom.adapters.DisplayPlaceAdapter;
 import mesto.ridom.mestoridom.adapters.PlaceCategory;
 import mesto.ridom.mestoridom.adapters.PlaceCategoryAdapter;
+import mesto.ridom.mestoridom.animations.BottomSheetAnimationsKt;
 import mesto.ridom.mestoridom.viewmodel.PlaceCategoryViewModel;
 import mesto.ridom.mestoridom.viewmodel.PlacesViewModel;
 
@@ -138,6 +140,8 @@ public class MainActivity extends BaseActivity {
         private InputMethodManager imm;
         private RecyclerView placeSearchRecycler;
         private DisplayPlaceAdapter displayPlaceAdapter;
+        private TextView topHint1;
+        private TextView topHint2;
 
         private PlaceCategoryViewModel placeCategoryViewModel;
         private PlacesViewModel placesViewModel;
@@ -184,11 +188,14 @@ public class MainActivity extends BaseActivity {
                 @SuppressLint("ClickableViewAccessibility")
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    if (placeSearchRecycler == null) {
-                        initPlaceSearchRecycler();
+                    if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        if (placeSearchRecycler == null) {
+                            initPlaceSearchRecycler();
+                        }
+                        placeSearchRecycler.setVisibility(View.VISIBLE);
+                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 1000);
                     }
-                    placeSearchRecycler.setVisibility(View.VISIBLE);
                     return false;
                 }
             });
@@ -197,6 +204,9 @@ public class MainActivity extends BaseActivity {
             bottomSheetBehavior.setDraggable(true);
             bottomSheetBehavior.setHideable(false);
             bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
+
+            topHint1 = rootView.findViewById(R.id.top_text_hint1);
+            topHint2 = rootView.findViewById(R.id.top_text_hint2);
 
             initRecycler();
         }

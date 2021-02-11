@@ -55,13 +55,8 @@
         app:behavior_hideable="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <View
-            android:layout_width="140dp"
-            android:layout_height="3dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bottom_round_corner_search" />
-
         <TextView
+            android:id="@+id/top_text_hint1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
@@ -71,6 +66,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/top_text_hint2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
