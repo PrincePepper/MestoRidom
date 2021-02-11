@@ -1,10 +1,11 @@
-package mesto.ridom.mestoridom;
+package mesto.ridom.mestoridom.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import mesto.ridom.mestoridom.R;
 import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
 
 public class SplashScreenActivity extends BaseActivity {

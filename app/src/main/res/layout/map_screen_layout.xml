@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/dummy_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_dummy_map" />
+
+    <LinearLayout
+        android:id="@+id/main_screen_help_snippet"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+        android:alpha="0.85"
+        android:background="@color/White"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/dummy_map"
+        app:layout_anchorGravity="top">
+
+        <TextView
+            android:id="@+id/help_where_are_you_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_vertical"
+            android:text="@string/help_suggestion_where_are_you"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/define_your_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_vertical"
+            android:text="@string/help_suggestion_define_your_location" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_screen_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_round_corner"
+        android:elevation="50dp"
+        android:orientation="vertical"
+        app:behavior_fitToContents="true"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:id="@+id/top_text_hint1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/what_are_you_seeking_for"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/top_text_hint2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/bottom_sheet_seek_comply" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/place_categories_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
+            android:layout_marginTop="24dp" />
+
+        <FrameLayout
+            android:id="@+id/main_screen_search_field_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp">
+
+            <EditText
+                android:id="@+id/main_screen_search_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@null"
+                android:hint="@string/place_search_hint"
+                android:inputType="text"
+                android:textSize="10sp" />
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/place_search_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

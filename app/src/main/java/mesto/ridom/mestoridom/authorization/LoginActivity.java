@@ -22,9 +22,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
-import mesto.ridom.mestoridom.MainActivity;
+import mesto.ridom.mestoridom.activities.MainActivity;
 import mesto.ridom.mestoridom.R;
-import mesto.ridom.mestoridom.SplashScreenActivity;
+import mesto.ridom.mestoridom.activities.SplashScreenActivity;
 
 public class LoginActivity extends AuthorizationActivity implements View.OnClickListener, TextView.OnEditorActionListener {
     private EditText mPasswordField;

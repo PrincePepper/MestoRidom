@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".FabFloorActivity" />
+        <activity android:name=".activities.FabFloorActivity" />
         <activity
             android:name=".authorization.AuthorizationActivity"
             android:screenOrientation="nosensor"
@@ -23,18 +23,20 @@
             android:name=".authorization.RegistrationActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".IntroActivity" />
+        <activity android:name=".activities.IntroActivity" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".activities.SplashScreenActivity"
+            android:screenOrientation="nosensor">
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="nosensor" />
     </application>
 
 </manifest>

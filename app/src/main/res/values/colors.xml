@@ -17,4 +17,5 @@
     <!--color fabfloor-->
     <color name="first">#655D5D</color>
     <color name="other">#80626262</color>
+    <color name="searchPlaceHolder">#767680</color>
 </resources>

@@ -1,4 +1,4 @@
-package mesto.ridom.mestoridom;
+package mesto.ridom.mestoridom.animations;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

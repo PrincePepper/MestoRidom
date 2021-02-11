@@ -30,10 +30,10 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.util.List;
 
-import mesto.ridom.mestoridom.BaseActivity;
-import mesto.ridom.mestoridom.MainActivity;
+import mesto.ridom.mestoridom.activities.BaseActivity;
+import mesto.ridom.mestoridom.activities.MainActivity;
 import mesto.ridom.mestoridom.R;
-import mesto.ridom.mestoridom.SplashScreenActivity;
+import mesto.ridom.mestoridom.activities.SplashScreenActivity;
 
 
 public class AuthorizationActivity extends BaseActivity implements View.OnClickListener {
