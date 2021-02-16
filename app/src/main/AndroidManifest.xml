@@ -30,7 +30,8 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="nosensor">
+            android:screenOrientation="nosensor"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
