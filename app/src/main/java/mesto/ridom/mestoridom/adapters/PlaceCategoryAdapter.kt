@@ -12,7 +12,7 @@ import mesto.ridom.mestoridom.R
 
 class PlaceCategoryAdapter(var callback: Callback?) : RecyclerView.Adapter<PlaceCategoryAdapter.PlaceCategoryViewHolder>() {
 
-    companion object{
+    companion object {
         const val VIEW_HOLDER_CLICKED = "VIEW_HOLDER_CLICKED"
     }
 

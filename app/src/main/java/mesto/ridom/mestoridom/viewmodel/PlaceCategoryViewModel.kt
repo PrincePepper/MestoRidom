@@ -21,10 +21,10 @@ class PlaceCategoryViewModel() : ViewModel() {
     fun getPaceCategories(): LiveData<List<PlaceCategory>> = placeCategories
 
     private fun loadPlaceCategories(): List<PlaceCategory> {
-        return listOf(PlaceCategory("Выход", 0xFF53D9EC.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_log_out, null)!!),
-                PlaceCategory("Лифт", 0xFFC03D3D.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_lift, null)!!),
-                PlaceCategory("Туалет", 0xFFAA78C2.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_bathroom, null)!!),
+        return listOf(PlaceCategory("Выход", 0xFF44A0C0.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_log_out, null)!!),
                 PlaceCategory("Еда", 0xFFFFB13B.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_caffe, null)!!),
+                PlaceCategory("Туалет", 0xFFAA78C2.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_bathroom, null)!!),
+                PlaceCategory("Лифт", 0xFFC03D3D.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_lift, null)!!),
                 PlaceCategory("ATM", 0xFF0FAA15.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_atm, null)!!),
                 PlaceCategory("Покупки", 0xFFCC1E66.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_shopping_bag, null)!!),
                 PlaceCategory("Досуг", 0xFFA880FF.toInt(), ResourcesCompat.getDrawable(resources, R.drawable.ic_gift, null)!!),

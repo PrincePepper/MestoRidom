@@ -1,7 +1,5 @@
 package mesto.ridom.mestoridom.activities;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
@@ -9,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,17 +15,14 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -48,11 +42,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import mesto.ridom.mestoridom.R;
-import mesto.ridom.mestoridom.activities.BaseActivity;
 import mesto.ridom.mestoridom.adapters.DisplayPlaceAdapter;
 import mesto.ridom.mestoridom.adapters.PlaceCategory;
 import mesto.ridom.mestoridom.adapters.PlaceCategoryAdapter;
@@ -63,6 +55,8 @@ import mesto.ridom.mestoridom.viewmodel.PlacesViewModel;
 
 public class MainActivity extends BaseActivity {
 
+    private static long back_pressed; //подчет секунд перед нажатием выхода
+
     private ViewPager2 viewPager;
     private FragmentStateAdapter fragmentStateAdapter;
     private TabLayout tabLayout;
@@ -72,11 +66,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        onWindowFocusChanged(false);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         viewPager = findViewById(R.id.main_screen_pager);
         tabLayout = findViewById(R.id.main_screen_tab_layout);
+
         fragmentStateAdapter = new FragmentAdapter(this);
         viewPager.setAdapter(fragmentStateAdapter);
+
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -92,15 +90,19 @@ public class MainActivity extends BaseActivity {
         }).attach();
     }
 
-    private static long back_pressed;
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        showSystemUI();
+    }
 
     @Override//выход по времени
     public void onBackPressed() {
         if (back_pressed + 2000 > System.currentTimeMillis())
             super.onBackPressed();
-        else
-            Toast.makeText(getBaseContext(), "Нажми еще раз чтобы выйти!",
-                    Toast.LENGTH_SHORT).show();
+        else Toast.makeText(getBaseContext(), "Нажми еще раз чтобы выйти!",
+                Toast.LENGTH_SHORT).show();
+
         back_pressed = System.currentTimeMillis();
     }
 
@@ -240,9 +242,9 @@ public class MainActivity extends BaseActivity {
             });
 
             bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-            bottomSheetBehavior.setDraggable(false);
+            bottomSheetBehavior.setDraggable(true);
             bottomSheetBehavior.setHideable(false);
-            bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, getActivity()));
+            bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, requireActivity())); //TODO оставляем requireActivity или как был getActivity
 
             topHint1 = rootView.findViewById(R.id.top_text_hint1);
             topHint2 = rootView.findViewById(R.id.top_text_hint2);
