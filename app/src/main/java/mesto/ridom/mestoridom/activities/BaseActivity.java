@@ -11,6 +11,8 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 public class BaseActivity extends AppCompatActivity {
 
+    public static String PublicEmail;
+
     public void KeyboardVisibilityEvent() {
         KeyboardVisibilityEvent.setEventListener(this,
                 new KeyboardVisibilityEventListener() {
@@ -29,13 +31,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
+        hideSystemUI();
     }
 
-
-    private void hideSystemUI() {
+    protected void hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
         // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -52,15 +51,14 @@ public class BaseActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
-
     // Shows the system bars by removing all the flags
     // except for the ones that make the content appear under the system bars.
-    private void showSystemUI() {
+    protected void showSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
     }
 
     protected void hideKeyboard(Activity activity) {
