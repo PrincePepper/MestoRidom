@@ -110,7 +110,7 @@
         android:layout_marginStart="@dimen/login_margin_l_r"
         android:layout_marginEnd="@dimen/login_margin_l_r"
         android:layout_marginBottom="31dp"
-        android:background="@drawable/btn_login_continue"
+        android:background="@drawable/rounded_rectangle"
         android:letterSpacing=".10"
         android:text="Зарегистрироваться"
         android:textColor="@color/White"

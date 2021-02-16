@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8D8D8"
+    android:background="@color/color7"
     tools:context=".authorization.AuthorizationActivity">
 
     <LinearLayout
@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/intro_image"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -73,12 +73,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/btn_intro"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="@color/color6"
             android:drawablePadding="8dp"
             android:fontFamily="sans-serif-medium"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Далее"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/intro_giptext"
@@ -92,8 +93,8 @@
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:text="Пропустить обучение"
-            android:textColor="#AC975F"
+            android:text="@string/skip_training"
+            android:textColor="@color/color6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

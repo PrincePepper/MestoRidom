@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/main_screen_help_snippet"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:alpha="0.85"
         android:background="@color/White"
@@ -15,24 +15,30 @@
 
         <TextView
             android:id="@+id/help_where_are_you_text"
+            style="@style/TextBold.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41dp"
             android:layout_marginTop="7dp"
             android:fontFamily="@font/montserrat"
-            android:gravity="center_vertical"
+            android:gravity="start|center_vertical"
+            android:paddingStart="41dp"
             android:text="@string/help_suggestion_where_are_you"
-            android:textSize="20sp" />
+            android:textColor="@color/colorTextCategory"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/define_your_location"
+            style="@style/Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:alpha="0.5"
             android:fontFamily="@font/montserrat"
-            android:gravity="center_vertical"
-            android:text="@string/help_suggestion_define_your_location" />
+            android:gravity="start|center_vertical"
+            android:paddingStart="41dp"
+            android:paddingEnd="41dp"
+            android:text="@string/help_suggestion_define_your_location"
+            android:textColor="@color/colorTextCategory" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,12 +53,14 @@
 
         <TextView
             android:id="@+id/top_text_hint1"
+            style="@style/TextBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/what_are_you_seeking_for"
+            android:textColor="#122932"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/top_text_hint2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,26 +71,28 @@
 
         <TextView
             android:id="@+id/top_text_hint2"
+            style="@style/Text.Сonsent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/bottom_sheet_seek_comply"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_text_hint1"
             app:layout_constraintBottom_toTopOf="@id/place_categories_recycler"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_text_hint1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_categories_recycler"
             android:layout_width="match_parent"
             android:layout_height="87dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_text_hint2"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@id/main_screen_search_field_holder"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_text_hint2" />
 
         <ImageView
             android:id="@+id/back_button"
@@ -90,44 +100,65 @@
             android:layout_height="47dp"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_back_button"
-            app:layout_constraintTop_toTopOf="@+id/main_screen_search_field_holder"
             app:layout_constraintBottom_toBottomOf="@+id/main_screen_search_field_holder"
-            app:layout_constraintEnd_toStartOf="@id/main_screen_search_field_holder"/>
+            app:layout_constraintEnd_toStartOf="@id/main_screen_search_field_holder"
+            app:layout_constraintTop_toTopOf="@+id/main_screen_search_field_holder" />
 
         <FrameLayout
             android:id="@+id/main_screen_search_field_holder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/place_categories_recycler"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="@color/LightSearchBarFieldBackground"
             app:layout_constraintBottom_toTopOf="@id/place_search_recycler"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/place_categories_recycler">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="13dp"
+                app:srcCompat="@drawable/ic_lupa" />
 
             <EditText
                 android:id="@+id/main_screen_search_edit_text"
+                style="@style/TextBold.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="8dp"
                 android:background="@null"
                 android:hint="@string/place_search_hint"
                 android:inputType="text"
-                android:textSize="10sp" />
+                android:textColor="@color/LightSearchBar"
+                android:textSize="14sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginEnd="17.4dp"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_exit" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_search_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/main_screen_search_field_holder"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_screen_search_field_holder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
