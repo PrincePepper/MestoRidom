@@ -6,11 +6,19 @@
         <item name="colorPrimary">#F8F7F7</item>
         <item name="colorPrimaryDark">#F8F7F7</item>
         <item name="colorAccent">@color/color6</item>
-        <item name="android:navigationBarColor">#59000000</item>
-
+        <item name="android:navigationBarColor">#0090A5</item>
         <item name="android:textSelectHandle">@drawable/ic_fselecthandlecenter</item>
         <item name="android:textSelectHandleLeft">@drawable/ic_fselecthandleleft</item>
         <item name="android:textSelectHandleRight">@drawable/ic_fselecthandleright</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">#00DDFF</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">#B3FFFFFF</item>
     </style>
 
     <style name="Text">
@@ -59,14 +67,6 @@
     <style name="Intro.Primary.Header">
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:navigationBarColor">#B3FFFFFF</item>
     </style>
 
     <style name="Text.Floor">

@@ -7,13 +7,18 @@
     <color name="Black">#000000</color>
     <color name="White">#FFFFFF</color>
 
-    <color name="color1">#F8F7F7</color>
+    <color name="color1">#F8F8F8</color>
     <color name="color2">#FAFAFA</color>
     <color name="color3">#80655D5D</color>
     <color name="color4">#103136</color>
     <color name="color5">#28545B</color>
     <color name="color6">#AC975F</color>
     <color name="color7">#D8D8D8</color>
+    <color name="colorTextCategory">#122932</color>
+    <color name="LightSearchBar">#818C99</color>
+    <color name="LightSearchBarFieldBackground">#EBEDF0</color>
+    <color name="color8">#99A2AD</color>
+    <color name="color9">#44A0C0</color>
     <!--color fabfloor-->
     <color name="first">#655D5D</color>
     <color name="other">#80626262</color>
