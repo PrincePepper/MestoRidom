@@ -7,8 +7,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import mesto.ridom.mestoridom.animations.FabAnimation;
 import mesto.ridom.mestoridom.R;
+import mesto.ridom.mestoridom.animations.FabAnimation;
 
 
 public class FabFloorActivity extends AppCompatActivity {

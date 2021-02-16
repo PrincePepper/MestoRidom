@@ -11,15 +11,11 @@ import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
 public class SplashScreenActivity extends BaseActivity {
     private static final String MY_SETTINGS = "my_settings";
 
-    public static final String APP_PREFERENCES_NAME = "Name_Person";
-    private static SharedPreferences sp;
-    public static String Email;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splach_screen);
-        sp = getSharedPreferences(MY_SETTINGS, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(MY_SETTINGS, MODE_PRIVATE);
         // проверяем, первый ли раз открывается программа
         boolean hasVisited = sp.getBoolean("hasVisited", false);
 
@@ -28,33 +24,31 @@ public class SplashScreenActivity extends BaseActivity {
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
             e.apply(); // не забудьте подтвердить изменения
-            startSplashAmimation();
+            startIntroAmimation();
         } else {
-            startSplashAmimation2();
+            missIntro();
         }
 
     }
 
-    private void startSplashAmimation2() {
+    private void missIntro() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent SplashIntent = new Intent(SplashScreenActivity.this, AuthorizationActivity.class);
-                SplashScreenActivity.this.startActivity(SplashIntent);
-                SplashScreenActivity.this.finish();
-
+                startActivity(SplashIntent);
+                finish();
             }
         }, 3000);
     }
 
-    private void startSplashAmimation() {
+    private void startIntroAmimation() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent SplashIntent = new Intent(SplashScreenActivity.this, IntroActivity.class);
-                SplashScreenActivity.this.startActivity(SplashIntent);
-                SplashScreenActivity.this.finish();
-
+                startActivity(SplashIntent);
+                finish();
             }
         }, 3000);
     }

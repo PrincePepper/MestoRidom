@@ -15,7 +15,7 @@ import mesto.ridom.mestoridom.R;
 import mesto.ridom.mestoridom.authorization.AuthorizationActivity;
 
 public class IntroActivity extends AppCompatActivity {
-    int a = 0;
+    private int a = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

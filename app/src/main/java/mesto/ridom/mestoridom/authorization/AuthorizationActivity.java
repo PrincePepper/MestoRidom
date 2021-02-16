@@ -30,38 +30,35 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.util.List;
 
+import mesto.ridom.mestoridom.R;
 import mesto.ridom.mestoridom.activities.BaseActivity;
 import mesto.ridom.mestoridom.activities.MainActivity;
-import mesto.ridom.mestoridom.R;
-import mesto.ridom.mestoridom.activities.SplashScreenActivity;
 
 
 public class AuthorizationActivity extends BaseActivity implements View.OnClickListener {
+    public static final String TAG_GOOGLE = "GoogleActivity";
+    private static final String TAG_ANON = "AnonymousAuth";
     public static final String APP_PREFERENCES_PEOPLE = "Person";
-    public static SharedPreferences sp2;
+
     public static final String TAG_EMAIL = "EmailPasswordLogin";
+    public static SharedPreferences sharedPreferences;
+    private boolean animationScreenChange = true;
+
     private EditText mEmailField;
+    private GoogleSignInClient mGoogleSignInClient;
 
     // [START declare_auth]
     protected FirebaseAuth mAuth;
     // [END declare_auth]
-
-    public static final String TAG_GOOGLE = "GoogleActivity";
-    private GoogleSignInClient mGoogleSignInClient;
-    // private ActivityGoogleBinding mBinding;
     private static final int RC_SIGN_IN = 9001;
-
-    private boolean temp = true;
-
-    private static final String TAG_ANON = "AnonymousAuth";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_1);
+        setContentView(R.layout.activity_auth);
         KeyboardVisibilityEvent();
 
-        sp2 = getSharedPreferences(APP_PREFERENCES_PEOPLE, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(APP_PREFERENCES_PEOPLE, MODE_PRIVATE);
 
         mEmailField = findViewById(R.id.email_shield);
 
@@ -90,16 +87,15 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        if (sp2.contains(APP_PREFERENCES_PEOPLE))
-            if (!sp2.getBoolean(APP_PREFERENCES_PEOPLE, false))
-                signOut();
+        if (sharedPreferences.contains(APP_PREFERENCES_PEOPLE) &&
+                !sharedPreferences.getBoolean(APP_PREFERENCES_PEOPLE, false))
+            signOut();
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
-
-        if (temp)
+        if (animationScreenChange)
             overridePendingTransition(R.anim.reg_left_in, R.anim.reg_right_out);
         else overridePendingTransition(R.anim.login_right_in, R.anim.login_left_out);
     }
@@ -108,7 +104,7 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
         if (validateForm(email)) {
             return;
         }
-        SplashScreenActivity.Email = email;
+        PublicEmail = email;
         // [START auth_differentiate_link]
         mAuth.fetchSignInMethodsForEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
@@ -116,7 +112,9 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
                         if (task.isSuccessful()) {
                             SignInMethodQueryResult result = task.getResult();
+                            assert result != null;
                             List<String> signInMethods = result.getSignInMethods();
+                            assert signInMethods != null;
                             if (signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
                                 Intent LoginIntent = new Intent(AuthorizationActivity.this, LoginActivity.class);
                                 AuthorizationActivity.this.startActivity(LoginIntent);
@@ -125,10 +123,10 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
                                 Intent RegIntent = new Intent(AuthorizationActivity.this, RegistrationActivity.class);
                                 AuthorizationActivity.this.startActivity(RegIntent);
                                 overridePendingTransition(R.anim.reg_left_in, R.anim.reg_right_out);
-                                temp = false;
+                                animationScreenChange = false;
                             }
                         } else {
-                            Log.e(TAG_EMAIL, "Error getting sign in methods for user", task.getException());
+                            Log.e(TAG_EMAIL, "Ошибка получения методов входа для пользователя", task.getException());
                         }
                     }
                 });
@@ -160,6 +158,7 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                assert account != null;
                 Log.d(TAG_GOOGLE, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
@@ -196,6 +195,7 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
                 });
     }
 
+
     private void signInAnonymously() {
         // [START signin_anonymously]
         mAuth.signInAnonymously()
@@ -223,14 +223,15 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
         mEmailField.setEnabled(true);
     }
 
+
     private boolean validateForm(String email) {
         boolean valid = true;
 
         if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Field can't be empty.");
+            mEmailField.setError("Поле не может быть пустым");
             valid = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mEmailField.setError("Please enter a valid email address");
+            mEmailField.setError("Пожалуйста, введите действительный адрес электронной почты");
             valid = false;
         } else {
             mEmailField.setError(null);
@@ -273,8 +274,8 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
 
 
     private void updateUI(FirebaseUser user) {
-        SharedPreferences.Editor editor = sp2.edit();
         if (user != null) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(APP_PREFERENCES_PEOPLE, true);
             editor.apply();
             Intent AuthorizationIntent = new Intent(AuthorizationActivity.this, MainActivity.class);
@@ -288,16 +289,17 @@ public class AuthorizationActivity extends BaseActivity implements View.OnClickL
         findViewById(R.id.skip_login_step).setEnabled(false);
         findViewById(R.id.button_login_google).setEnabled(false);
         mEmailField.setEnabled(false);
+
         int i = view.getId();
         if (i == R.id.check_login_reg) {
+
             hideKeyboard(AuthorizationActivity.this);
             differentiateLink(mEmailField.getText().toString());
             //createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+
         } else if (i == R.id.button_login_google) {
             signIn_Google();
-
         } else if (i == R.id.skip_login_step) {
-
             signInAnonymously();
         }
     }

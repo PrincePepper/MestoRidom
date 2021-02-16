@@ -22,8 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import mesto.ridom.mestoridom.activities.MainActivity;
 import mesto.ridom.mestoridom.R;
+import mesto.ridom.mestoridom.activities.MainActivity;
 
 public class RegistrationActivity extends AuthorizationActivity implements View.OnClickListener {
     EditText mNameField, mEmailField, mPasswordField, mPasswordFieldRepeat;
@@ -42,7 +42,7 @@ public class RegistrationActivity extends AuthorizationActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_3);
+        setContentView(R.layout.activity_regist);
         KeyboardVisibilityEvent();
 
         mNameField = findViewById(R.id.reg_name);
@@ -129,7 +129,7 @@ public class RegistrationActivity extends AuthorizationActivity implements View.
     }
 
     private void updateUI(FirebaseUser user) {
-        SharedPreferences.Editor editor = sp2.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         if (user != null) {
             editor.putBoolean(APP_PREFERENCES_PEOPLE, true);
             editor.apply();
