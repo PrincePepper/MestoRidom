@@ -39,16 +39,30 @@
             android:paddingEnd="41dp"
             android:text="@string/help_suggestion_define_your_location"
             android:textColor="@color/colorTextCategory" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/fab_filter"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/rounded_rectangle_13"
+        android:contentDescription="@string/todo"
+        android:elevation="15dp"
+        app:layout_anchor="@id/main_screen_bottom_sheet"
+        app:layout_anchorGravity="end"
+        app:srcCompat="@drawable/ic_filter" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_screen_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bottom_round_corner"
-        android:elevation="50dp"
+        android:elevation="10dp"
         app:behavior_fitToContents="true"
-        app:behavior_hideable="true"
+        app:behavior_hideable="false"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <TextView
@@ -87,7 +101,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_categories_recycler"
             android:layout_width="match_parent"
-            android:layout_height="87dp"
+            android:layout_height="85dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@id/main_screen_search_field_holder"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,8 +166,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_search_recycler"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,5 +176,6 @@
             app:layout_constraintTop_toBottomOf="@id/main_screen_search_field_holder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

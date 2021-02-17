@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.place_item_layout.view.*
 import mesto.ridom.mestoridom.R
 
-class DisplayPlaceAdapter() : RecyclerView.Adapter<DisplayPlaceAdapter.PlaceViewHolder>() {
+class DisplayPlaceAdapter : RecyclerView.Adapter<DisplayPlaceAdapter.PlaceViewHolder>() {
 
     lateinit var data: List<Place>
 
@@ -22,8 +22,8 @@ class DisplayPlaceAdapter() : RecyclerView.Adapter<DisplayPlaceAdapter.PlaceView
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder =
-            PlaceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.place_item_layout, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            PlaceViewHolder = PlaceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.place_item_layout, parent, false))
 
     override fun getItemCount(): Int = data.size
 

@@ -3,7 +3,6 @@ package mesto.ridom.mestoridom.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,8 +27,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -115,14 +113,6 @@ public class MainActivity extends BaseActivity {
             super(fragmentActivity);
         }
 
-        public FragmentAdapter(@NonNull Fragment fragment) {
-            super(fragment);
-        }
-
-        public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-            super(fragmentManager, lifecycle);
-        }
-
         @NonNull
         @Override
         public Fragment createFragment(int position) {
@@ -137,6 +127,36 @@ public class MainActivity extends BaseActivity {
         @Override
         public int getItemCount() {
             return 2;
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        ViewGroup v = (ViewGroup) findViewById(R.id.main_screen_bottom_sheet);
+        if (v != null)
+            requestDisallowInterceptTouchEvent(v, true);
+//            switch (event.getAction()) {
+//                case MotionEvent.ACTION_DOWN:
+//                    requestDisallowInterceptTouchEvent(v, true);
+//                    break;
+//                case MotionEvent.ACTION_CANCEL:
+//                case MotionEvent.ACTION_UP:
+//                    requestDisallowInterceptTouchEvent(v, false);
+//                    break;
+//                default:
+//                    break;
+//            }
+        return super.dispatchTouchEvent(event);
+    }
+
+    private void requestDisallowInterceptTouchEvent(ViewGroup v, boolean disallowIntercept) {
+        v.requestDisallowInterceptTouchEvent(disallowIntercept);
+        int childCount = v.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View child = v.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                requestDisallowInterceptTouchEvent((ViewGroup) child, disallowIntercept);
+            }
         }
     }
 
@@ -157,6 +177,7 @@ public class MainActivity extends BaseActivity {
         private RecyclerView placeSearchRecycler;
         private DisplayPlaceAdapter displayPlaceAdapter;
         private TextView topHint1;
+        private ImageButton fab_filter;
         private TextView topHint2;
         private ImageView dummyMap;
         private ImageView backButton;
@@ -174,7 +195,7 @@ public class MainActivity extends BaseActivity {
         }
 
         private float dpToPixels(int dp) {
-            return dpToPixels(dp, getContext());
+            return dpToPixels(dp, requireContext());
         }
 
         @Override
@@ -197,12 +218,12 @@ public class MainActivity extends BaseActivity {
                     CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mainScreenHelpSnippet.getLayoutParams();
                     layoutParams.setAnchorId(dummyMap.getId());
                     layoutParams.width = rootView.getWidth();
-                    layoutParams.height = (int) dpToPixels(75);
                     mainScreenHelpSnippet.setLayoutParams(layoutParams);
 
                     rootView.bringChildToFront(mainScreenHelpSnippet);
                 }
             });
+
             return rootView;
         }
 
@@ -217,13 +238,13 @@ public class MainActivity extends BaseActivity {
 
             bottomSheet = rootView.findViewById(R.id.main_screen_bottom_sheet);
             searchPlaceHolder = rootView.findViewById(R.id.main_screen_search_field_holder);
-            searchPlace = searchPlaceHolder.findViewById(R.id.main_screen_search_edit_text);
+            searchPlace = rootView.findViewById(R.id.main_screen_search_edit_text);
 
-            Drawable searchPlaceHolderBackground = ResourcesCompat.getDrawable(getResources(), R.drawable.bottom_round_corner_search, null);
-            assert searchPlaceHolderBackground != null;
-            searchPlaceHolderBackground.setTint(ResourcesCompat.getColor(getResources(), R.color.searchPlaceHolder, null));
-            searchPlaceHolderBackground.setAlpha((int) (0.12f * 255));
-            searchPlaceHolder.setBackground(searchPlaceHolderBackground);
+//            Drawable searchPlaceHolderBackground = ResourcesCompat.getDrawable(getResources(), R.drawable.bottom_round_corner_search, null);
+//            searchPlaceHolderBackground.setTint(ResourcesCompat.getColor(getResources(), R.color.searchPlaceHolder, null));
+//            searchPlaceHolderBackground.setAlpha((int) (0.12f * 255));
+//            searchPlaceHolder.setBackground(searchPlaceHolderBackground);
+
 
             searchPlace.setOnTouchListener(new View.OnTouchListener() {
                 @SuppressLint("ClickableViewAccessibility")
@@ -243,9 +264,10 @@ public class MainActivity extends BaseActivity {
 
             bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
             bottomSheetBehavior.setDraggable(true);
-            bottomSheetBehavior.setHideable(false);
-            bottomSheetBehavior.setPeekHeight((int) dpToPixels(260, requireActivity())); //TODO оставляем requireActivity или как был getActivity
+            bottomSheetBehavior.setPeekHeight((int) dpToPixels(245, requireActivity())); //высота видимой части нижнего бара
 
+            fab_filter = rootView.findViewById(R.id.fab_filter);
+            fab_filter.setTranslationY(-100);
             topHint1 = rootView.findViewById(R.id.top_text_hint1);
             topHint2 = rootView.findViewById(R.id.top_text_hint2);
 
@@ -254,6 +276,7 @@ public class MainActivity extends BaseActivity {
 
         private void initRecycler() {
             recyclerView = rootView.findViewById(R.id.place_categories_recycler);
+            recyclerView.setHasFixedSize(true);
             RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
                 @Override
                 public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -303,6 +326,7 @@ public class MainActivity extends BaseActivity {
             placeSearchRecycler.setAdapter(displayPlaceAdapter);
             placeSearchRecycler.setLayoutManager(linearLayoutManager);
         }
+
 
     }
 
