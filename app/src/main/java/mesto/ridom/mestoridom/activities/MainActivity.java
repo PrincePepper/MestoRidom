@@ -30,7 +30,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -40,13 +42,14 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mesto.ridom.mestoridom.R;
 import mesto.ridom.mestoridom.adapters.DisplayPlaceAdapter;
+import mesto.ridom.mestoridom.adapters.FloorAdapter;
 import mesto.ridom.mestoridom.adapters.PlaceCategory;
 import mesto.ridom.mestoridom.adapters.PlaceCategoryAdapter;
-import mesto.ridom.mestoridom.animations.BottomSheetAnimationsKt;
 import mesto.ridom.mestoridom.viewmodel.PlaceCategoryViewModel;
 import mesto.ridom.mestoridom.viewmodel.PlacesViewModel;
 
@@ -134,18 +137,18 @@ public class MainActivity extends BaseActivity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         ViewGroup v = (ViewGroup) findViewById(R.id.main_screen_bottom_sheet);
         if (v != null)
-            requestDisallowInterceptTouchEvent(v, true);
-//            switch (event.getAction()) {
-//                case MotionEvent.ACTION_DOWN:
-//                    requestDisallowInterceptTouchEvent(v, true);
-//                    break;
-//                case MotionEvent.ACTION_CANCEL:
-//                case MotionEvent.ACTION_UP:
-//                    requestDisallowInterceptTouchEvent(v, false);
-//                    break;
-//                default:
-//                    break;
-//            }
+//            requestDisallowInterceptTouchEvent(v, true);
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    requestDisallowInterceptTouchEvent(v, true);
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                case MotionEvent.ACTION_UP:
+                    requestDisallowInterceptTouchEvent(v, false);
+                    break;
+                default:
+                    break;
+            }
         return super.dispatchTouchEvent(event);
     }
 
@@ -178,10 +181,12 @@ public class MainActivity extends BaseActivity {
         private DisplayPlaceAdapter displayPlaceAdapter;
         private TextView topHint1;
         private ImageButton fab_filter;
+        private ConstraintLayout ConstraintLayoutFloor;
+        private RecyclerView recyclerViewFloor;
         private TextView topHint2;
         private ImageView dummyMap;
         private ImageView backButton;
-
+        private ArrayList<String> states;
         private PlaceCategoryViewModel placeCategoryViewModel;
         private PlacesViewModel placesViewModel;
 
@@ -246,6 +251,21 @@ public class MainActivity extends BaseActivity {
 //            searchPlaceHolder.setBackground(searchPlaceHolderBackground);
 
 
+///TODO надо чекнуть почему срабатывает только со второго раза:
+//            searchPlace.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+//                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                        if (placeSearchRecycler == null) {
+//                            initPlaceSearchRecycler();
+//                        }
+//                        placeSearchRecycler.setVisibility(View.VISIBLE);
+//                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 500);
+//                    }
+//                }
+//            });
+
             searchPlace.setOnTouchListener(new View.OnTouchListener() {
                 @SuppressLint("ClickableViewAccessibility")
                 @Override
@@ -256,7 +276,7 @@ public class MainActivity extends BaseActivity {
                             initPlaceSearchRecycler();
                         }
                         placeSearchRecycler.setVisibility(View.VISIBLE);
-                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 500);
+//                        BottomSheetAnimationsKt.hideTopText(getContext(), topHint1, topHint2, recyclerView, searchPlaceHolder, 500);
                     }
                     return false;
                 }
@@ -266,17 +286,66 @@ public class MainActivity extends BaseActivity {
             bottomSheetBehavior.setDraggable(true);
             bottomSheetBehavior.setPeekHeight((int) dpToPixels(245, requireActivity())); //высота видимой части нижнего бара
 
+            // настройка колбэков при изменениях
+            bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull View bottomSheet, int newState) {
+
+                    // этот код скрывает {@click fab_filter} сразу же
+                    // и отображает после того как нижний экран полностью свернется
+                    if (BottomSheetBehavior.STATE_DRAGGING == newState) {
+                        fab_filter.animate().scaleX(0).scaleY(0).setDuration(300).start();
+                        hideKeyboard(requireActivity());
+                    } else if (BottomSheetBehavior.STATE_COLLAPSED == newState) {
+                        fab_filter.animate().scaleX(1).scaleY(1).setDuration(300).start();
+                    }
+                }
+
+                @Override
+                public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                }
+            });
+
+
+            initRecyclerFloor();
+            ConstraintLayoutFloor = rootView.findViewById(R.id.ConstraintLayoutFloor);
+            ConstraintLayoutFloor.setTranslationY(dpToPixels(-90));
+
             fab_filter = rootView.findViewById(R.id.fab_filter);
-            fab_filter.setTranslationY(-100);
+            fab_filter.setTranslationY(dpToPixels(-60));
+
             topHint1 = rootView.findViewById(R.id.top_text_hint1);
             topHint2 = rootView.findViewById(R.id.top_text_hint2);
 
             initRecycler();
         }
 
+        private void initRecyclerFloor() {
+            recyclerView = rootView.findViewById(R.id.recyclerViewFloor);
+//            recyclerView.setHasFixedSize(true);
+            SnapHelper snapHelper = new PagerSnapHelper();
+            snapHelper.attachToRecyclerView(recyclerView);
+            states = new ArrayList<>();
+            states.add("");
+            for (int i = 1; i < 15; i++) {
+                states.add(String.valueOf(i));
+            }
+            states.add("");
+
+            FloorAdapter floorAdapter = new FloorAdapter(getContext(), states);
+            floorAdapter.setOnItemClickListener(new FloorAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View v, int pos) {
+                    Toast.makeText(v.getContext(), "clicked:" + pos, Toast.LENGTH_SHORT).show();
+                }
+            });
+            recyclerView.setAdapter(floorAdapter);
+        }
+
         private void initRecycler() {
             recyclerView = rootView.findViewById(R.id.place_categories_recycler);
             recyclerView.setHasFixedSize(true);
+
             RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
                 @Override
                 public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {

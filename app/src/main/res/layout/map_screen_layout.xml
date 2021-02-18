@@ -49,18 +49,50 @@
         android:layout_margin="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_rectangle_13"
         android:contentDescription="@string/todo"
-        android:elevation="15dp"
+        android:elevation="3dp"
         app:layout_anchor="@id/main_screen_bottom_sheet"
         app:layout_anchorGravity="end"
         app:srcCompat="@drawable/ic_filter" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutFloor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:elevation="50dp"
+        app:layout_anchor="@id/main_screen_bottom_sheet"
+        app:layout_anchorGravity="start">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFloor"
+            android:layout_width="40dp"
+            android:layout_height="120dp"
+            android:background="@drawable/fon"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_recyclerViewFloor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/selection"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerViewFloor"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerViewFloor"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewFloor"
+            app:layout_constraintTop_toTopOf="@+id/recyclerViewFloor" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_screen_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bottom_round_corner"
-        android:elevation="10dp"
+        android:elevation="2dp"
         app:behavior_fitToContents="true"
         app:behavior_hideable="false"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -176,6 +208,5 @@
             app:layout_constraintTop_toBottomOf="@id/main_screen_search_field_holder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
